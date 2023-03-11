@@ -6,6 +6,25 @@ public class Puzzle8
   public static final String BLANK = "B";
   private static final int BOARD_COLS = 3;
   private static final int BOARD_ROWS = 3;
+
+  /**
+   * Default constructor creates a solved puzzle
+   */
+  public Puzzle8()
+  {
+    String defaultStart = "1 2 3 8 B 4 7 6 5";
+    String[] splitInputs = defaultStart.split(" ");
+
+    board[0][0] = splitInputs[0];
+    board[0][1] = splitInputs[1];
+    board[0][2] = splitInputs[2];
+    board[1][0] = splitInputs[3];
+    board[1][1] = splitInputs[4];
+    board[1][2] = splitInputs[5];
+    board[2][0] = splitInputs[6];
+    board[2][1] = splitInputs[7];
+    board[2][2] = splitInputs[8];
+  }
   public Puzzle8(String start)
   {
     String[] splitInputs = start.replace( "(", "" )
@@ -33,9 +52,9 @@ public class Puzzle8
     int newRow = coordinate.getRow()+1;
     int newColumn = coordinate.getColumn();
 
-    if (!isInBounds(newRow, newColumn))
+    if (isOutOfBounds(newRow, newColumn))
     {
-      System.out.println("Cannot move in that direction.");
+//      System.out.println("Cannot move in that direction.");
       return;
     }
 
@@ -48,9 +67,9 @@ public class Puzzle8
     board[row2][col2] = temp;
   }
 
-  private boolean isInBounds(int row, int column)
+  private boolean isOutOfBounds(int row, int column)
   {
-    return rowExists(row) && columnExists(column);
+    return !rowExists(row) || !columnExists(column);
   }
   private boolean rowExists(int rowNumber){
     return rowNumber <= BOARD_ROWS-1
@@ -79,9 +98,9 @@ public class Puzzle8
     int newRow = coordinate.getRow()-1;
     int newColumn = coordinate.getColumn();
 
-    if (!isInBounds(newRow, newColumn))
+    if (isOutOfBounds(newRow, newColumn))
     {
-      System.out.println("Cannot move in that direction.");
+//      System.out.println("Cannot move in that direction.");
       return;
     }
 
@@ -93,9 +112,9 @@ public class Puzzle8
     int newRow = coordinate.getRow();
     int newColumn = coordinate.getColumn()-1;
 
-    if (!isInBounds(newRow, newColumn))
+    if (isOutOfBounds(newRow, newColumn))
     {
-      System.out.println("Cannot move in that direction.");
+//      System.out.println("Cannot move in that direction.");
       return;
     }
 
@@ -107,9 +126,9 @@ public class Puzzle8
     int newRow = coordinate.getRow();
     int newColumn = coordinate.getColumn()+1;
 
-    if (!isInBounds(newRow, newColumn))
+    if (isOutOfBounds(newRow, newColumn))
     {
-      System.out.println("Cannot move in that direction.");
+//      System.out.println("Cannot move in that direction.");
       return;
     }
 
@@ -154,7 +173,6 @@ public class Puzzle8
       for (int j=0; j<3; j++) {
         horizontalBoard[horizontalBoardCounter] = board[i][j];
         horizontalBoardCounter++;
-        System.out.print(board[i][j]);
       }
     }
 

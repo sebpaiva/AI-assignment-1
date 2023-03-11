@@ -21,7 +21,8 @@ public class PermutationInversion {
 
         String[] horizontalBoard = puzzle8.convertToHorizontalBoard();
 
-        permutationInversionSum += PermutationInversion.inversionsForValue(horizontalBoard, "1");
+        // `1` never has any tiles on its left in its final position
+        // permutationInversionSum += PermutationInversion.inversionsForValue(horizontalBoard, "1");
         permutationInversionSum += PermutationInversion.inversionsForValue(horizontalBoard, "2");
         permutationInversionSum += PermutationInversion.inversionsForValue(horizontalBoard, "3");
         permutationInversionSum += PermutationInversion.inversionsForValue(horizontalBoard, "4");
@@ -37,7 +38,7 @@ public class PermutationInversion {
         int permutationCounter = 0;
 
         int indexOfFinalPositionValue = findIndexOfValue(horizontalEnd, value);
-        List<String> leftElementsOfFinalPosition = Arrays.asList(horizontalBoard).subList(0, indexOfFinalPositionValue);
+        List<String> leftElementsOfFinalPosition = Arrays.asList(horizontalEnd).subList(0, indexOfFinalPositionValue);
 
         int indexOfValue = findIndexOfValue(horizontalBoard, value);
 
@@ -47,7 +48,6 @@ public class PermutationInversion {
                 permutationCounter++;
             }
         }
-        System.out.println("Value: " + value + "; Count: " + permutationCounter);
 
         return permutationCounter;
     }
