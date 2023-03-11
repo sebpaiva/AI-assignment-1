@@ -2,16 +2,15 @@ package Puzzle8;
 
 public class Puzzle8
 {
-  private final String[][] board = new String[boardCols][boardRows];
-  private static final String BLANK = "B";
-  private static final int boardCols = 3;
-  private static final int boardRows = 3;
-
+  private final String[][] board = new String[BOARD_ROWS][BOARD_COLS];
+  public static final String BLANK = "B";
+  private static final int BOARD_COLS = 3;
+  private static final int BOARD_ROWS = 3;
   public Puzzle8(String start)
   {
     String[] splitInputs = start.replace( "(", "" )
       .replace( ")", "" )
-      .split( "\s" );
+      .split(" ");
 
     board[0][0] = splitInputs[0];
     board[0][1] = splitInputs[1];
@@ -22,6 +21,11 @@ public class Puzzle8
     board[2][0] = splitInputs[6];
     board[2][1] = splitInputs[7];
     board[2][2] = splitInputs[8];
+  }
+
+  public boolean isValueAt(String value, int row, int col)
+  {
+    return board[row][col].equals(value);
   }
 
   public void moveBlankDown(){
@@ -48,24 +52,21 @@ public class Puzzle8
   {
     return rowExists(row) && columnExists(column);
   }
-
   private boolean rowExists(int rowNumber){
-    return rowNumber <= boardRows-1
+    return rowNumber <= BOARD_ROWS-1
       && rowNumber >= 0;
   }
 
   private boolean columnExists(int colNumber){
-    return colNumber <= boardCols-1
+    return colNumber <= BOARD_COLS-1
       && colNumber >= 0;
   }
 
-  private GridCoordinate findGridPositionOf(String value) {
-    for(int i=0; i<3; i++)
-    {
-      for (int j=0; j<3; j++)
-      {
+  public GridCoordinate findGridPositionOf(String value) {
+    for(int i=0; i<3; i++) {
+      for (int j=0; j<3; j++) {
         if (board[i][j].equals(value)) {
-          return new GridCoordinate( i, j );
+          return new GridCoordinate(i, j);
         }
       }
     }
@@ -115,6 +116,51 @@ public class Puzzle8
     swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newRow, newColumn);
   }
 
+  public GridCoordinate getFinalPositionOf(String value){
+    switch (value) {
+      case "1" -> {
+        return new GridCoordinate(0, 0);
+      }
+      case "2" -> {
+        return new GridCoordinate(0, 1);
+      }
+      case "3" -> {
+        return new GridCoordinate(0, 2);
+      }
+      case "4" -> {
+        return new GridCoordinate(1, 2);
+      }
+      case "5" -> {
+        return new GridCoordinate(2, 2);
+      }
+      case "6" -> {
+        return new GridCoordinate(2, 1);
+      }
+      case "7" -> {
+        return new GridCoordinate(2, 0);
+      }
+      case "8" -> {
+        return new GridCoordinate(1, 0);
+      }
+    }
+    return null;
+  }
+
+  public String[] convertToHorizontalBoard(){
+    String[] horizontalBoard = new String[BOARD_ROWS*BOARD_COLS];
+    int horizontalBoardCounter = 0;
+
+    for(int i=0; i<3; i++) {
+      for (int j=0; j<3; j++) {
+        horizontalBoard[horizontalBoardCounter] = board[i][j];
+        horizontalBoardCounter++;
+        System.out.print(board[i][j]);
+      }
+    }
+
+    return horizontalBoard;
+  }
+
   public boolean isPuzzleSolved()
   {
     return board[0][0].equals("1")
@@ -149,33 +195,24 @@ public class Puzzle8
     return "\t\t\t│ " + a + " | " + b + " | " + c + " │";
   }
 
-  private class GridCoordinate{
-    private final int x, y;
+  public record GridCoordinate(int x, int y) {
 
-    public GridCoordinate(int x, int y){
-      this.x = x;
-      this.y = y;
-    }
+      // Column
+      public int getRow() {
+        return x;
+      }
 
-    // Column
-    public int getRow()
-    {
-      return x;
-    }
+      // Row
+      public int getColumn() {
+        return y;
+      }
 
-    // Row
-    public int getColumn()
-    {
-      return y;
+      @Override
+      public String toString() {
+        return "GridCoordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+      }
     }
-
-    @Override
-    public String toString()
-    {
-      return "GridCoordinate{" +
-        "x=" + x +
-        ", y=" + y +
-        '}';
-    }
-  }
 }

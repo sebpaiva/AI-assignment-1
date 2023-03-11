@@ -1,3 +1,4 @@
+import Puzzle8.Heuristics.HammingDistance;
 import Puzzle8.Puzzle8;
 
 import java.util.Scanner;
@@ -32,6 +33,7 @@ public class Main
       {
         case "exit" -> exit(0 );
         case "print" -> puzzle8.printPuzzle();
+        case "hamming" -> System.out.println("Hamming distance is: " + HammingDistance.calculate(puzzle8));
         case "down" -> {
           puzzle8.moveBlankDown();
           puzzle8.printPuzzle();
