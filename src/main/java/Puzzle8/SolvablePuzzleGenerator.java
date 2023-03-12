@@ -1,7 +1,5 @@
 package Puzzle8;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 public class SolvablePuzzleGenerator {
     public static Puzzle8 generate(){
         Puzzle8 puzzle8 = new Puzzle8();
@@ -11,14 +9,14 @@ public class SolvablePuzzleGenerator {
         int range = 4;
 
         // Scramble the board by doing many randomly decided moves
-        for(int i=0; i<5000; i++){
+        for(int i=0; i<10000; i++){
             randomNum = (int)(Math.random() * range) + min;
 
             switch (randomNum) {
-                case 1 -> puzzle8.moveBlankDown();
-                case 2 -> puzzle8.moveBlankUp();
-                case 3 -> puzzle8.moveBlankLeft();
-                case 4 -> puzzle8.moveBlankRight();
+                case 1 -> puzzle8.moveBlank(Puzzle8.Direction.DOWN);
+                case 2 -> puzzle8.moveBlank(Puzzle8.Direction.UP);
+                case 3 -> puzzle8.moveBlank(Puzzle8.Direction.LEFT);
+                case 4 -> puzzle8.moveBlank(Puzzle8.Direction.RIGHT);
             }
         }
 

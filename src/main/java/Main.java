@@ -39,22 +39,23 @@ public class Main
         case "permutation" -> System.out.println("Permutation inversion is: " + PermutationInversion.calculate(puzzle8));
         case "manhattan" -> System.out.println("Manhattan distance is: " + ManhattanDistance.calculate(puzzle8));
         case "down" -> {
-          puzzle8.moveBlankDown();
+          puzzle8.moveBlank(Puzzle8.Direction.DOWN);
           puzzle8.printPuzzle();
         }
         case "up" -> {
-          puzzle8.moveBlankUp();
+          puzzle8.moveBlank(Puzzle8.Direction.UP);
           puzzle8.printPuzzle();
         }
         case "left" -> {
-          puzzle8.moveBlankLeft();
+          puzzle8.moveBlank(Puzzle8.Direction.LEFT);
           puzzle8.printPuzzle();
         }
         case "right" -> {
-          puzzle8.moveBlankRight();
+          puzzle8.moveBlank(Puzzle8.Direction.RIGHT);
           puzzle8.printPuzzle();
         }
         case "solved" -> System.out.println(puzzle8.isPuzzleSolved());
+        case "successors" -> puzzle8.getSuccessorStates().forEach(Puzzle8::printPuzzle);
       }
     }
   }

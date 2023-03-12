@@ -1,29 +1,26 @@
 package Puzzle8;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Puzzle8
 {
-  private final String[][] board = new String[BOARD_ROWS][BOARD_COLS];
-  public static final String BLANK = "B";
-  private static final int BOARD_COLS = 3;
+  public enum Direction {
+    UP, DOWN, LEFT, RIGHT, NONE;
+  }
+  private String[][] board = new String[BOARD_ROWS][BOARD_COLS];
   private static final int BOARD_ROWS = 3;
+  private static final int BOARD_COLS = 3;
+  public static final String BLANK = "B";
+  private Direction lastMove = Direction.NONE;
 
   /**
    * Default constructor creates a solved puzzle
    */
   public Puzzle8()
   {
-    String defaultStart = "1 2 3 8 B 4 7 6 5";
-    String[] splitInputs = defaultStart.split(" ");
-
-    board[0][0] = splitInputs[0];
-    board[0][1] = splitInputs[1];
-    board[0][2] = splitInputs[2];
-    board[1][0] = splitInputs[3];
-    board[1][1] = splitInputs[4];
-    board[1][2] = splitInputs[5];
-    board[2][0] = splitInputs[6];
-    board[2][1] = splitInputs[7];
-    board[2][2] = splitInputs[8];
+    this( "1 2 3 8 B 4 7 6 5");
   }
   public Puzzle8(String start)
   {
@@ -42,23 +39,84 @@ public class Puzzle8
     board[2][2] = splitInputs[8];
   }
 
+  public Puzzle8(Puzzle8 original)
+  {
+    for(int i=0; i<original.board.length; i++){
+      System.arraycopy(original.board[i], 0, this.board[i], 0, original.board[0].length);
+    }
+    this.lastMove = original.lastMove;
+  }
+
+  public List<Puzzle8> getSuccessorStates(){
+    List<Puzzle8> possibleMoves = new ArrayList<>();
+
+    if (canMove(Direction.UP) && lastMove != Direction.DOWN){
+      Puzzle8 nextUp = new Puzzle8(this);
+      nextUp.moveBlank(Direction.UP);
+      possibleMoves.add(nextUp);
+    }
+    if(canMove(Direction.LEFT) && lastMove != Direction.RIGHT) {
+      Puzzle8 nextLeft = new Puzzle8(this);
+      nextLeft.moveBlank(Direction.LEFT);
+      possibleMoves.add(nextLeft);
+    }
+    if(canMove(Direction.RIGHT) && lastMove != Direction.LEFT) {
+      Puzzle8 nextRight = new Puzzle8(this);
+      nextRight.moveBlank(Direction.RIGHT);
+      possibleMoves.add(nextRight);
+    }
+    if(canMove(Direction.DOWN) && lastMove != Direction.DOWN){
+      Puzzle8 nextDown = new Puzzle8(this);
+      nextDown.moveBlank(Direction.DOWN);
+      possibleMoves.add(nextDown);
+    }
+
+    return possibleMoves;
+  }
+
   public boolean isValueAt(String value, int row, int col)
   {
     return board[row][col].equals(value);
   }
 
-  public void moveBlankDown(){
-    GridCoordinate coordinate = findGridPositionOf(BLANK);
-    int newRow = coordinate.getRow()+1;
-    int newColumn = coordinate.getColumn();
+  private boolean canMove(Direction direction){
+    GridCoordinate coordinate = getPostMoveBlankCoordinates(direction);
+    return !isOutOfBounds(coordinate);
+  }
 
-    if (isOutOfBounds(newRow, newColumn))
+  public void moveBlank(Direction direction){
+    GridCoordinate coordinate = findGridPositionOf(BLANK);
+
+    GridCoordinate newCoordinate = getPostMoveBlankCoordinates(direction);
+
+    if (isOutOfBounds(newCoordinate))
     {
-//      System.out.println("Cannot move in that direction.");
       return;
     }
 
-    swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newRow, newColumn);
+    lastMove = direction;
+    swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newCoordinate.getRow(), newCoordinate.getColumn());
+  }
+
+  private GridCoordinate getPostMoveBlankCoordinates(Direction direction){
+    GridCoordinate currentCoordinate = findGridPositionOf(BLANK);
+
+    switch (direction)
+    {
+      case UP -> {
+        return new GridCoordinate(currentCoordinate.getRow()-1, currentCoordinate.getColumn());
+      }
+      case DOWN -> {
+        return new GridCoordinate(currentCoordinate.getRow()+1, currentCoordinate.getColumn());
+      }
+      case LEFT -> {
+        return new GridCoordinate(currentCoordinate.getRow(), currentCoordinate.getColumn()-1);
+      }
+      case RIGHT -> {
+        return new GridCoordinate(currentCoordinate.getRow(), currentCoordinate.getColumn()+1);
+      }
+    }
+    return new GridCoordinate(-1,-1);
   }
 
   private void swapBoardValues(int row1, int col1, int row2, int col2){
@@ -67,9 +125,9 @@ public class Puzzle8
     board[row2][col2] = temp;
   }
 
-  private boolean isOutOfBounds(int row, int column)
+  private boolean isOutOfBounds(GridCoordinate coordinate)
   {
-    return !rowExists(row) || !columnExists(column);
+    return !rowExists(coordinate.getRow()) || !columnExists(coordinate.getColumn());
   }
   private boolean rowExists(int rowNumber){
     return rowNumber <= BOARD_ROWS-1
@@ -91,48 +149,6 @@ public class Puzzle8
     }
 
     throw new IllegalArgumentException("Could not find position of " + value + " on the board, is it valid?");
-  }
-
-  public void moveBlankUp(){
-    GridCoordinate coordinate = findGridPositionOf(BLANK);
-    int newRow = coordinate.getRow()-1;
-    int newColumn = coordinate.getColumn();
-
-    if (isOutOfBounds(newRow, newColumn))
-    {
-//      System.out.println("Cannot move in that direction.");
-      return;
-    }
-
-    swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newRow, newColumn);
-  }
-
-  public void moveBlankLeft(){
-    GridCoordinate coordinate = findGridPositionOf(BLANK);
-    int newRow = coordinate.getRow();
-    int newColumn = coordinate.getColumn()-1;
-
-    if (isOutOfBounds(newRow, newColumn))
-    {
-//      System.out.println("Cannot move in that direction.");
-      return;
-    }
-
-    swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newRow, newColumn);
-  }
-
-  public void moveBlankRight(){
-    GridCoordinate coordinate = findGridPositionOf(BLANK);
-    int newRow = coordinate.getRow();
-    int newColumn = coordinate.getColumn()+1;
-
-    if (isOutOfBounds(newRow, newColumn))
-    {
-//      System.out.println("Cannot move in that direction.");
-      return;
-    }
-
-    swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newRow, newColumn);
   }
 
   public GridCoordinate getFinalPositionOf(String value){
@@ -192,6 +208,22 @@ public class Puzzle8
       && board[2][2].equals("5");
   }
 
+  @Override
+  public boolean equals(Object other) {
+    // Compare references
+    if (other == this) {
+      return true;
+    }
+
+    // Check if is an instance of Puzzle8
+    if (!(other instanceof Puzzle8 otherPuzzle)) {
+      return false;
+    }
+
+    return Arrays.toString(this.convertToHorizontalBoard())
+            .equals(Arrays.toString(otherPuzzle.convertToHorizontalBoard()));
+  }
+
   public void printPuzzle(){
     String firstLine = preparePrintLine(board[0][0], board[0][1], board[0][2]);
     String secondLine = preparePrintLine(board[1][0], board[1][1], board[1][2]);
@@ -199,18 +231,18 @@ public class Puzzle8
 
     System.out.println("__________________________");
     System.out.println("The current puzzle is:");
-    System.out.println("\t\t\t┌───┬───┬───┐");
+    System.out.println("\t┌───┬───┬───┐");
     System.out.println(firstLine);
-    System.out.println("\t\t\t├───┼───┼───┤");
+    System.out.println("\t├───┼───┼───┤");
     System.out.println(secondLine);
-    System.out.println("\t\t\t├───┼───┼───┤");
+    System.out.println("\t├───┼───┼───┤");
     System.out.println(thirdLine);
-    System.out.println("\t\t\t└───┴───┴───┘");
+    System.out.println("\t└───┴───┴───┘");
     System.out.println("__________________________\n");
   }
 
-  String preparePrintLine(String a, String b, String c){
-    return "\t\t\t│ " + a + " | " + b + " | " + c + " │";
+  private String preparePrintLine(String a, String b, String c){
+    return "\t│ " + a + " | " + b + " | " + c + " │";
   }
 
   public record GridCoordinate(int x, int y) {
