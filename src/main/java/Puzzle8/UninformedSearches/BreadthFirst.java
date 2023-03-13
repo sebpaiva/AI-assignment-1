@@ -9,17 +9,17 @@ import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class BreadthFirst {
-    private Queue<Puzzle8> open = new LinkedList<>();
-    private Queue<Puzzle8> closed = new LinkedList<>();
+    private final Queue<Puzzle8> open = new LinkedList<>();
+    private final Queue<Puzzle8> closed = new LinkedList<>();
 
-    private Puzzle8 initial;
+    private final Puzzle8 initial;
     private boolean foundSolution = false;
     private long totalTime;
-    private int moveCounter;
+    private int totalMoves;
 
     public BreadthFirst(Puzzle8 initial) {
         this.initial = initial;
-        moveCounter = -1; // Processing the initial state brings us to 0
+//        moveCounter = -1; // Processing the initial state brings us to 0
     }
     public void calculate(){
         open.add(initial);
@@ -32,6 +32,7 @@ public class BreadthFirst {
             if(current.isPuzzleSolved()){
                 foundSolution = true;
                 totalTime = System.currentTimeMillis()-startTimer;
+                totalMoves = current.getMoveCounter();
                 return;
             }
 
@@ -41,7 +42,7 @@ public class BreadthFirst {
                     .filter(successor -> !closed.contains(successor))
                     .toList();
 
-            moveCounter++;
+//            moveCounter++;
             open.addAll(unseenSuccessorsOfCurrent);
         }
 
@@ -53,8 +54,8 @@ public class BreadthFirst {
     public String toString() {
         return "BreadthFirst{" +
                 "foundSolution=" + foundSolution +
-                ", timeTaken=" + totalTime +
-                ", moveCounter=" + moveCounter +
+                ", minutesTaken=" + totalTime/60000 +
+                ", totalMoves=" + totalMoves +
                 ", openListSize=" + open.size() +
                 ", closedListSize(states processed)=" + closed.size() +
                 '}';
@@ -80,7 +81,7 @@ public class BreadthFirst {
         return totalTime;
     }
 
-    public int getMoveCounter() {
-        return moveCounter;
+    public int getTotalMoves() {
+        return totalMoves;
     }
 }

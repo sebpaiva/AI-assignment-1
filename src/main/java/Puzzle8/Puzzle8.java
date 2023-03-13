@@ -15,6 +15,8 @@ public class Puzzle8
   public static final String BLANK = "B";
   private Direction lastMove = Direction.NONE;
 
+  private int moveCounter = 0;
+
   /**
    * Default constructor creates a solved puzzle
    */
@@ -45,6 +47,7 @@ public class Puzzle8
       System.arraycopy(original.board[i], 0, this.board[i], 0, original.board[0].length);
     }
     this.lastMove = original.lastMove;
+    this.moveCounter = original.moveCounter;
   }
 
   public List<Puzzle8> getSuccessorStates(){
@@ -94,6 +97,7 @@ public class Puzzle8
       return;
     }
 
+    moveCounter++;
     lastMove = direction;
     swapBoardValues(coordinate.getRow(), coordinate.getColumn(), newCoordinate.getRow(), newCoordinate.getColumn());
   }
@@ -243,6 +247,14 @@ public class Puzzle8
 
   private String preparePrintLine(String a, String b, String c){
     return "\t│ " + a + " | " + b + " | " + c + " │";
+  }
+
+  public Direction getLastMove() {
+    return lastMove;
+  }
+
+  public int getMoveCounter() {
+    return moveCounter;
   }
 
   public record GridCoordinate(int x, int y) {
