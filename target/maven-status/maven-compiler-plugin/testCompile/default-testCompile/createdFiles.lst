@@ -1,0 +1,5 @@
+Puzzle8\Puzzle8Test.class
+Puzzle8\Heuristics\HammingDistanceTest.class
+Puzzle8\Heuristics\PermutationInversionTest.class
+Puzzle8\Heuristics\ManhattanDistanceTest.class
+Puzzle8\UninformedSearches\BreadthFirstTest.class

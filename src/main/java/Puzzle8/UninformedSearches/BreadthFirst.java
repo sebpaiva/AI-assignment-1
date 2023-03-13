@@ -1,12 +1,11 @@
 package Puzzle8.UninformedSearches;
 
 import Puzzle8.Puzzle8;
+import Puzzle8.Puzzle8.Direction;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.stream.Collectors;
 
 public class BreadthFirst {
     private final Queue<Puzzle8> open = new LinkedList<>();
@@ -19,10 +18,12 @@ public class BreadthFirst {
 
     public BreadthFirst(Puzzle8 initial) {
         this.initial = initial;
-//        moveCounter = -1; // Processing the initial state brings us to 0
     }
+
     public void calculate(){
-        open.add(initial);
+        Puzzle8 initialCopy = new Puzzle8(initial);
+        initial.setLastMove( Direction.NONE );
+        open.add(initialCopy);
 
         long startTimer = System.currentTimeMillis();
         while(!open.isEmpty()){
@@ -42,7 +43,6 @@ public class BreadthFirst {
                     .filter(successor -> !closed.contains(successor))
                     .toList();
 
-//            moveCounter++;
             open.addAll(unseenSuccessorsOfCurrent);
         }
 
@@ -54,7 +54,7 @@ public class BreadthFirst {
     public String toString() {
         return "BreadthFirst{" +
                 "foundSolution=" + foundSolution +
-                ", minutesTaken=" + totalTime/60000 +
+                ", minutesTaken=" + ((double)totalTime)/60000 +
                 ", totalMoves=" + totalMoves +
                 ", openListSize=" + open.size() +
                 ", closedListSize(states processed)=" + closed.size() +

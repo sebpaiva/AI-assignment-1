@@ -9,7 +9,7 @@ public class SolvablePuzzleGenerator {
         int range = 4;
 
         // Scramble the board by doing many randomly decided moves
-        for(int i=0; i<100; i++){
+        for(int i=0; i<10; i++){
             randomNum = (int)(Math.random() * range) + min;
 
             switch (randomNum) {

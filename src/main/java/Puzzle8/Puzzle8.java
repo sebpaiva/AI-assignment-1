@@ -9,10 +9,11 @@ public class Puzzle8
   public enum Direction {
     UP, DOWN, LEFT, RIGHT, NONE;
   }
-  private String[][] board = new String[BOARD_ROWS][BOARD_COLS];
+  private final String[][] board = new String[BOARD_ROWS][BOARD_COLS];
   private static final int BOARD_ROWS = 3;
   private static final int BOARD_COLS = 3;
   public static final String BLANK = "B";
+
   private Direction lastMove = Direction.NONE;
 
   private int moveCounter = 0;
@@ -24,6 +25,7 @@ public class Puzzle8
   {
     this( "1 2 3 8 B 4 7 6 5");
   }
+
   public Puzzle8(String start)
   {
     String[] splitInputs = start.replace( "(", "" )
@@ -40,7 +42,6 @@ public class Puzzle8
     board[2][1] = splitInputs[7];
     board[2][2] = splitInputs[8];
   }
-
   public Puzzle8(Puzzle8 original)
   {
     for(int i=0; i<original.board.length; i++){
@@ -133,11 +134,11 @@ public class Puzzle8
   {
     return !rowExists(coordinate.getRow()) || !columnExists(coordinate.getColumn());
   }
+
   private boolean rowExists(int rowNumber){
     return rowNumber <= BOARD_ROWS-1
       && rowNumber >= 0;
   }
-
   private boolean columnExists(int colNumber){
     return colNumber <= BOARD_COLS-1
       && colNumber >= 0;
@@ -257,15 +258,21 @@ public class Puzzle8
     return moveCounter;
   }
 
+  public void setLastMove( Direction lastMove )
+  {
+    this.lastMove = lastMove;
+  }
+
   public record GridCoordinate(int x, int y) {
 
+
       // Column
-      public int getRow() {
+    public int getRow() {
         return x;
       }
 
       // Row
-      public int getColumn() {
+    public int getColumn() {
         return y;
       }
 
@@ -276,5 +283,5 @@ public class Puzzle8
                 ", y=" + y +
                 '}';
       }
-    }
+  }
 }
