@@ -16,6 +16,11 @@ public class Puzzle8
 
   private Direction lastMove = Direction.NONE;
 
+  public void setMoveCounter( int moveCounter )
+  {
+    this.moveCounter = moveCounter;
+  }
+
   private int moveCounter = 0;
 
   /**
@@ -258,9 +263,9 @@ public class Puzzle8
     return moveCounter;
   }
 
-  public void setLastMove( Direction lastMove )
+  public void clearLastMoves()
   {
-    this.lastMove = lastMove;
+    this.lastMove = Direction.NONE;
   }
 
   public record GridCoordinate(int x, int y) {

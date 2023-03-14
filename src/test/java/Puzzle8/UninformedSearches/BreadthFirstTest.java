@@ -15,7 +15,7 @@ class BreadthFirstTest {
         breadthFirst.calculate();
 
         System.out.println(breadthFirst);
-//        assertEquals(0, breadthFirst.getMoveCounter());
+        assertEquals(0, breadthFirst.getTotalMoves());
     }
     @Test
     void calculate_oneMoveToSolution() {
@@ -25,7 +25,7 @@ class BreadthFirstTest {
         breadthFirst.calculate();
 
         System.out.println(breadthFirst);
-//        assertEquals(1, breadthFirst.getMoveCounter());
+        assertEquals(1, breadthFirst.getTotalMoves());
     }
 
     @Test
@@ -39,26 +39,24 @@ class BreadthFirstTest {
 //        assertEquals(0, breadthFirst.getMoveCounter());
     }
 
-    @Test
-    void calculate_100MoveToSolution() {
-        Puzzle8 puzzle = new Puzzle8("4 1 6 8 5 2 7 B 3");
-        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
+//    @Test
+//    void calculate_100MoveToSolution() {
+//        Puzzle8 puzzle = new Puzzle8("4 1 6 8 5 2 7 B 3");
+//        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
+//
+//        breadthFirst.calculate();
+//
+//        System.out.println(breadthFirst);
+////        assertEquals(0, breadthFirst.getMoveCounter());
+//    }
 
-        breadthFirst.calculate();
-
-        System.out.println(breadthFirst);
-//        assertEquals(0, breadthFirst.getMoveCounter());
-    }
-
-
-
-    @Test
-    void calculate_scrambled() {
-        Puzzle8 puzzle = new Puzzle8("8 6 4 2 3 7 1 5 B");
-
-        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
-        breadthFirst.calculate();
-
-        System.out.println(breadthFirst);
-    }
+//    @Test
+//    void calculate_scrambled() {
+//        Puzzle8 puzzle = new Puzzle8("8 6 4 2 3 7 1 5 B");
+//
+//        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
+//        breadthFirst.calculate();
+//
+//        System.out.println(breadthFirst);
+//    }
 }

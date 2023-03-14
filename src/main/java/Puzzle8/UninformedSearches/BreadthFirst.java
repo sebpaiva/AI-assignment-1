@@ -22,7 +22,8 @@ public class BreadthFirst {
 
     public void calculate(){
         Puzzle8 initialCopy = new Puzzle8(initial);
-        initial.setLastMove( Direction.NONE );
+        initialCopy.clearLastMoves();
+        initialCopy.setMoveCounter( 0 );
         open.add(initialCopy);
 
         long startTimer = System.currentTimeMillis();
@@ -54,7 +55,7 @@ public class BreadthFirst {
     public String toString() {
         return "BreadthFirst{" +
                 "foundSolution=" + foundSolution +
-                ", minutesTaken=" + ((double)totalTime)/60000 +
+                ", minutesTaken=" + Math.round(((double)totalTime)/6000000 )/100 +
                 ", totalMoves=" + totalMoves +
                 ", openListSize=" + open.size() +
                 ", closedListSize(states processed)=" + closed.size() +

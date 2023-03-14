@@ -19,7 +19,10 @@ public class DepthFirst {
   }
 
   public void calculate(){
-    open.push(initial);
+    Puzzle8 initialCopy = new Puzzle8(initial);
+    initialCopy.clearLastMoves();
+    initialCopy.setMoveCounter( 0 );
+    open.add(initialCopy);
 
     long startTimer = System.currentTimeMillis();
     while(!open.isEmpty()){
@@ -49,7 +52,7 @@ public class DepthFirst {
   public String toString() {
     return "DepthFirst{" +
       "foundSolution=" + foundSolution +
-      ", minutesTaken=" + ((double)totalTime)/60000 +
+      ", minutesTaken=" + Math.round(((double)totalTime)/6000000 )/100 +
       ", totalMoves=" + totalMoves +
       ", openListSize=" + open.size() +
       ", closedListSize(states processed)=" + closed.size() +

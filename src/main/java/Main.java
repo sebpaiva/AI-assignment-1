@@ -64,10 +64,12 @@ public class Main
         case "bfs" -> {
           BreadthFirst bf = new BreadthFirst(puzzle8);
           bf.calculate();
+          System.out.println(bf);
         }
         case "dfs" -> {
           DepthFirst df = new DepthFirst(puzzle8);
           df.calculate();
+          System.out.println(df);
         }
       }
     }
