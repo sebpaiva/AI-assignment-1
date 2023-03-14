@@ -1,16 +1,17 @@
 package Puzzle8.InformedSearches;
 
-import Puzzle8.Heuristics.IHeuristic;
+import Puzzle8.Heuristics.Interface.IHeuristic;
 import Puzzle8.Puzzle8;
 import Puzzle8.HeuristicPuzzle;
+import Puzzle8.UninformedSearches.UninformedSearchHelper;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-public class BestFirst {
+public class BestFirst
+{
   private final Queue<HeuristicPuzzle> open = new PriorityQueue<>();
   private final Queue<HeuristicPuzzle> closed = new PriorityQueue<>();
 
@@ -50,8 +51,8 @@ public class BestFirst {
 
       // Filter out states which are already in open or closed lists
       List<HeuristicPuzzle> unseenSuccessorsOfCurrent = current.getPuzzle8().getSuccessorStates().stream()
-        .filter( successor -> !open.stream().map(HeuristicPuzzle::getPuzzle8).toList().contains( successor ) )
-        .filter( successor -> !closed.stream().map(HeuristicPuzzle::getPuzzle8).toList().contains( successor ) )
+        .filter( successor -> !open.stream().map( HeuristicPuzzle::getPuzzle8 ).toList().contains( successor ) )
+        .filter( successor -> !closed.stream().map( HeuristicPuzzle::getPuzzle8 ).toList().contains( successor ) )
         .map( puzzle -> new HeuristicPuzzle( puzzle, heuristic.calculate( puzzle ), 0 ) )
         .toList();
 
@@ -60,5 +61,41 @@ public class BestFirst {
 
     System.out.println( "A solution could not be found. Can the puzzle be solved?" );
     totalTime = System.currentTimeMillis() - startTimer;
+  }
+
+  public void printSolutionSteps()
+  {
+    UninformedSearchHelper.printSolutionSteps( initial, moveHistory );
+  }
+
+  @Override
+  public String toString()
+  {
+    return UninformedSearchHelper.toStringFormat( "BestFirst",
+                                                  foundSolution,
+                                                  totalTime,
+                                                  totalMoves,
+                                                  open.size(),
+                                                  closed.size() );
+  }
+
+  public Puzzle8 getInitial()
+  {
+    return initial;
+  }
+
+  public boolean isFoundSolution()
+  {
+    return foundSolution;
+  }
+
+  public long getTotalTime()
+  {
+    return totalTime;
+  }
+
+  public int getTotalMoves()
+  {
+    return totalMoves;
   }
 }

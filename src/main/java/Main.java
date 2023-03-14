@@ -20,6 +20,10 @@ public class Main
   static void playTest8Puzzle()
   {
     Puzzle8 puzzle8 = new Puzzle8();
+    HammingDistance hammingDistance = new HammingDistance();
+    ManhattanDistance manhattanDistance = new ManhattanDistance();
+    PermutationInversion permutationInversion = new PermutationInversion();
+
     puzzle8.printPuzzle();
     String command;
 
@@ -57,9 +61,9 @@ public class Main
         case "solved" -> System.out.println(puzzle8.isPuzzleSolved());
         case "successors" -> puzzle8.getSuccessorStates().forEach(Puzzle8::printPuzzle);
         // Heuristics
-        case "hamming" -> System.out.println("Hamming distance is: " + HammingDistance.calculate(puzzle8));
-        case "permutation" -> System.out.println("Permutation inversion is: " + PermutationInversion.calculate(puzzle8));
-        case "manhattan" -> System.out.println("Manhattan distance is: " + ManhattanDistance.calculate(puzzle8));
+        case "hamming" -> System.out.println("Hamming distance is: " + hammingDistance.calculate(puzzle8));
+        case "permutation" -> System.out.println("Permutation inversion is: " + permutationInversion.calculate(puzzle8));
+        case "manhattan" -> System.out.println("Manhattan distance is: " + manhattanDistance.calculate(puzzle8));
         // Uninformed Searches
         case "bfs" -> {
           BreadthFirst bf = new BreadthFirst(puzzle8);
