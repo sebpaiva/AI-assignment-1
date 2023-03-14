@@ -3,6 +3,8 @@ import Puzzle8.Heuristics.ManhattanDistance;
 import Puzzle8.Heuristics.PermutationInversion;
 import Puzzle8.Puzzle8;
 import Puzzle8.SolvablePuzzleGenerator;
+import Puzzle8.UninformedSearches.BreadthFirst;
+import Puzzle8.UninformedSearches.DepthFirst;
 
 import java.util.Scanner;
 
@@ -30,14 +32,8 @@ public class Main
       switch ( command )
       {
         case "exit" -> exit(0 );
+        // General methods
         case "print" -> puzzle8.printPuzzle();
-        case "generate" -> {
-          puzzle8 = SolvablePuzzleGenerator.generate();
-          puzzle8.printPuzzle();
-        }
-        case "hamming" -> System.out.println("Hamming distance is: " + HammingDistance.calculate(puzzle8));
-        case "permutation" -> System.out.println("Permutation inversion is: " + PermutationInversion.calculate(puzzle8));
-        case "manhattan" -> System.out.println("Manhattan distance is: " + ManhattanDistance.calculate(puzzle8));
         case "down" -> {
           puzzle8.moveBlank(Puzzle8.Direction.DOWN);
           puzzle8.printPuzzle();
@@ -54,8 +50,29 @@ public class Main
           puzzle8.moveBlank(Puzzle8.Direction.RIGHT);
           puzzle8.printPuzzle();
         }
+        case "generate" -> {
+          puzzle8 = SolvablePuzzleGenerator.generate();
+          puzzle8.printPuzzle();
+        }
         case "solved" -> System.out.println(puzzle8.isPuzzleSolved());
         case "successors" -> puzzle8.getSuccessorStates().forEach(Puzzle8::printPuzzle);
+        // Heuristics
+        case "hamming" -> System.out.println("Hamming distance is: " + HammingDistance.calculate(puzzle8));
+        case "permutation" -> System.out.println("Permutation inversion is: " + PermutationInversion.calculate(puzzle8));
+        case "manhattan" -> System.out.println("Manhattan distance is: " + ManhattanDistance.calculate(puzzle8));
+        // Uninformed Searches
+        case "bfs" -> {
+          BreadthFirst bf = new BreadthFirst(puzzle8);
+          bf.calculate();
+          bf.printSolutionSteps();
+          System.out.println(bf);
+        }
+        case "dfs" -> {
+          DepthFirst df = new DepthFirst(puzzle8);
+          df.calculate();
+          df.printSolutionSteps();
+          System.out.println(df);
+        }
       }
     }
   }
