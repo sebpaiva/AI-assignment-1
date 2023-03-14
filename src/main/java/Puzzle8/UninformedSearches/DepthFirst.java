@@ -1,11 +1,13 @@
 package Puzzle8.UninformedSearches;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
 import Puzzle8.Puzzle8;
 
-public class DepthFirst {
+public class DepthFirst
+{
   private final Stack<Puzzle8> open = new Stack<>();
   private final Stack<Puzzle8> closed = new Stack<>();
 
@@ -13,73 +15,92 @@ public class DepthFirst {
   private boolean foundSolution = false;
   private long totalTime;
   private int totalMoves;
+  private List<Puzzle8.Direction> moveHistory = new ArrayList<>();
 
-  public DepthFirst(Puzzle8 puzzle8){
+  public DepthFirst( Puzzle8 puzzle8 )
+  {
     this.initial = puzzle8;
   }
 
-  public void calculate(){
-    Puzzle8 initialCopy = new Puzzle8(initial);
-    initialCopy.clearLastMoves();
+  public void calculate()
+  {
+    Puzzle8 initialCopy = new Puzzle8( initial );
+    initialCopy.clearMoveHistory();
     initialCopy.setMoveCounter( 0 );
-    open.add(initialCopy);
+    open.add( initialCopy );
 
     long startTimer = System.currentTimeMillis();
-    while(!open.isEmpty()){
+    while ( !open.isEmpty() )
+    {
       Puzzle8 current = open.pop();
-      closed.push(current);
+      closed.push( current );
 
-      if(current.isPuzzleSolved()){
+      if ( current.isPuzzleSolved() )
+      {
         foundSolution = true;
-        totalTime = System.currentTimeMillis()-startTimer;
+        totalTime = System.currentTimeMillis() - startTimer;
         totalMoves = current.getMoveCounter();
+        moveHistory = current.getMoveHistory();
         return;
       }
 
       // Filter out states which are already in open or closed lists
       List<Puzzle8> unseenSuccessorsOfCurrent = current.getSuccessorStates().stream()
-        .filter(successor -> !open.contains(successor))
-        .filter(successor -> !closed.contains(successor))
+        .filter( successor -> !open.contains( successor ) )
+        .filter( successor -> !closed.contains( successor ) )
         .toList();
 
-      open.addAll(unseenSuccessorsOfCurrent);
+      open.addAll( unseenSuccessorsOfCurrent );
     }
 
-    totalTime = System.currentTimeMillis()-startTimer;
+    System.out.println( "A solution could not be found. Can the puzzle be solved?" );
+    totalTime = System.currentTimeMillis() - startTimer;
   }
 
   @Override
-  public String toString() {
+  public String toString()
+  {
     return "DepthFirst{" +
       "foundSolution=" + foundSolution +
-      ", minutesTaken=" + Math.round(((double)totalTime)/6000000 )/100 +
+      ", secondsTaken=" + ( ( double ) Math.round( ( ( double ) totalTime ) / 10 ) ) / 100 +
       ", totalMoves=" + totalMoves +
       ", openListSize=" + open.size() +
       ", closedListSize(states processed)=" + closed.size() +
       '}';
   }
 
-  public Stack<Puzzle8> getOpen() {
+  public void printSolutionSteps()
+  {
+    UninformedSearchHelper.printSolutionSteps( initial, moveHistory );
+  }
+
+  public Stack<Puzzle8> getOpen()
+  {
     return open;
   }
 
-  public Stack<Puzzle8> getClosed() {
+  public Stack<Puzzle8> getClosed()
+  {
     return closed;
   }
 
-  public Puzzle8 getInitial() {
+  public Puzzle8 getInitial()
+  {
     return initial;
   }
 
-  public boolean isFoundSolution() {
+  public boolean isFoundSolution()
+  {
     return foundSolution;
   }
 
-  public long getTotalTime() {
+  public long getTotalTime()
+  {
     return totalTime;
   }
 
-  public int getTotalMoves() {
+  public int getTotalMoves()
+  {
     return totalMoves;
   }
 }
