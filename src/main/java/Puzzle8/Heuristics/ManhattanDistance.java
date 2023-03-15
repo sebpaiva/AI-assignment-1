@@ -23,8 +23,6 @@ public class ManhattanDistance implements IHeuristic
     return manhattanDistanceSum;
   }
 
-
-
   public static int shortestDistanceToEnd( Puzzle8 puzzle, String value )
   {
     Puzzle8.GridCoordinate origin = puzzle.findGridPositionOf( value );

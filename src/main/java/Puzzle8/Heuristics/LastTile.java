@@ -12,35 +12,39 @@ public class LastTile
     int manhattanDistanceSum = 0;
 
     manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "1" );
-    if ( lastTileApplies(puzzle8, "2") )
+    if ( lastTileApplies( puzzle8, "2" ) )
     {
       manhattanDistanceSum += shortestDistanceToCentre( puzzle8, "2" );
     }
-    else{
+    else
+    {
       manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "2" );
     }
     manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "3" );
-    if ( lastTileApplies(puzzle8, "4") )
+    if ( lastTileApplies( puzzle8, "4" ) )
     {
       manhattanDistanceSum += shortestDistanceToCentre( puzzle8, "4" );
     }
-    else{
+    else
+    {
       manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "4" );
     }
     manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "5" );
-    if ( lastTileApplies(puzzle8, "6") )
+    if ( lastTileApplies( puzzle8, "6" ) )
     {
       manhattanDistanceSum += shortestDistanceToCentre( puzzle8, "6" );
     }
-    else{
+    else
+    {
       manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "6" );
     }
     manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "7" );
-    if ( lastTileApplies(puzzle8, "8") )
+    if ( lastTileApplies( puzzle8, "8" ) )
     {
       manhattanDistanceSum += shortestDistanceToCentre( puzzle8, "8" );
     }
-    else{
+    else
+    {
       manhattanDistanceSum += ManhattanDistance.shortestDistanceToEnd( puzzle8, "8" );
     }
 

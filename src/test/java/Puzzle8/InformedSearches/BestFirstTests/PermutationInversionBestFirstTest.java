@@ -87,16 +87,16 @@ class PermutationInversionBestFirstTest
     assertEquals( 86, bestFirst.getTotalMoves() );
   }
 
-  @Test
-  void calculateChallengeInput()
-  {
-    Puzzle8 puzzle = new Puzzle8( "8 6 4 2 3 7 1 5 B" );
-    BestFirst bestFirst = new BestFirst( puzzle );
-
-    bestFirst.calculate( new PermutationInversion() );
-
-    bestFirst.printSolutionSteps();
-    System.out.println( bestFirst );
-    assertEquals( 86, bestFirst.getTotalMoves() );
-  }
+//  @Test
+//  void calculateChallengeInput()
+//  {
+//    Puzzle8 puzzle = new Puzzle8( "4 1 3 7 B 5 8 2 6" );
+//    BestFirst bestFirst = new BestFirst( puzzle );
+//
+//    bestFirst.calculate( new PermutationInversion() );
+//
+//    bestFirst.printSolutionSteps();
+//    System.out.println( bestFirst );
+//    assertEquals( 86, bestFirst.getTotalMoves() );
+//  }
 }

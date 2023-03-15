@@ -75,15 +75,16 @@ class PermutationInversionAStarTest
   }
 
 //  @Test
-//  void calculate_scrambled()
+//  void calculateChallengeInput()
 //  {
-//    Puzzle8 puzzle = new Puzzle8( "8 6 4 2 3 7 1 5 B" );
+//    Puzzle8 puzzle = new Puzzle8( "4 1 3 7 B 5 8 2 6" );
 //    AStar aStar = new AStar( puzzle );
 //
 //    aStar.calculate( new PermutationInversion() );
 //
 //    aStar.printSolutionSteps();
 //    System.out.println( aStar );
-//    assertEquals( 22, aStar.getTotalMoves() );
+//    assertEquals( 16, aStar.getTotalMoves() );
 //  }
+
 }

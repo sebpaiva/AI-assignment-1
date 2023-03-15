@@ -1,6 +1,7 @@
 package Puzzle8.InformedSearches.AStarTests;
 
 import Puzzle8.Heuristics.ManhattanDistance;
+import Puzzle8.Heuristics.PermutationInversion;
 import Puzzle8.InformedSearches.AStar;
 import Puzzle8.InformedSearches.AStar;
 import Puzzle8.Puzzle8;
@@ -87,4 +88,17 @@ class ManhattanAStarTest
     System.out.println( aStar );
     assertEquals( 22, aStar.getTotalMoves() );
   }
+
+//  @Test
+//  void calculateChallengeInput()
+//  {
+//    Puzzle8 puzzle = new Puzzle8( "4 1 3 7 B 5 8 2 6" );
+//    AStar aStar = new AStar( puzzle );
+//
+//    aStar.calculate( new ManhattanDistance() );
+//
+//    aStar.printSolutionSteps();
+//    System.out.println( aStar );
+//    assertEquals( 16, aStar.getTotalMoves() );
+//  }
 }

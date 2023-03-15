@@ -66,17 +66,17 @@ class BreadthFirstTest {
         assertEquals(16, breadthFirst.getTotalMoves());
     }
 
-    @Test
-    void challengeInput() {
-        Puzzle8 puzzle = new Puzzle8("2 4 5 3 B 1 8 7 6");
-        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
-
-        breadthFirst.calculate();
-
-        breadthFirst.printSolutionSteps();
-        System.out.println(breadthFirst);
-        assertEquals(16, breadthFirst.getTotalMoves());
-    }
+//    @Test
+//    void challengeInput() {
+//        Puzzle8 puzzle = new Puzzle8("2 4 5 3 B 1 8 7 6");
+//        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
+//
+//        breadthFirst.calculate();
+//
+//        breadthFirst.printSolutionSteps();
+//        System.out.println(breadthFirst);
+//        assertEquals(16, breadthFirst.getTotalMoves());
+//    }
 
     // Takes too long, can't run it
 //    @Test

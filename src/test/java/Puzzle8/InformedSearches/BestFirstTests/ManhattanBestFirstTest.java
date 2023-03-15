@@ -86,4 +86,17 @@ class ManhattanBestFirstTest
     System.out.println( bestFirst );
     assertEquals( 72, bestFirst.getTotalMoves() );
   }
+
+//  @Test
+//  void calculateChallengeInput()
+//  {
+//    Puzzle8 puzzle = new Puzzle8( "4 1 3 7 B 5 8 2 6" );
+//    BestFirst bestFirst = new BestFirst( puzzle );
+//
+//    bestFirst.calculate( new ManhattanDistance() );
+//
+//    bestFirst.printSolutionSteps();
+//    System.out.println( bestFirst );
+//    assertEquals( 72, bestFirst.getTotalMoves() );
+//  }
 }

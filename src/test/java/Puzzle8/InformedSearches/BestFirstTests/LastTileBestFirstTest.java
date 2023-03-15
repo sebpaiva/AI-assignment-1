@@ -87,4 +87,16 @@ public class LastTileBestFirstTest
     System.out.println( bestFirst );
     assertEquals( 104, bestFirst.getTotalMoves() );
   }
+//  @Test
+//  void calculateChallengeInput()
+//  {
+//    Puzzle8 puzzle = new Puzzle8( "4 1 3 7 B 5 8 2 6" );
+//    BestFirst bestFirst = new BestFirst( puzzle );
+//
+//    bestFirst.calculate( new LastTile() );
+//
+//    bestFirst.printSolutionSteps();
+//    System.out.println( bestFirst );
+//    assertEquals( 104, bestFirst.getTotalMoves() );
+//  }
 }

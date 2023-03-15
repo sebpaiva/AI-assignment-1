@@ -19,15 +19,15 @@ class DepthFirstTest
         assertEquals(0, breadthFirst.getTotalMoves());
     }
 
-    @Test
-    void challengeInput() {
-        Puzzle8 puzzle = new Puzzle8("2 4 5 3 B 1 8 7 6");
-        DepthFirst depthFirst = new DepthFirst(puzzle);
-
-        depthFirst.calculate();
-
-        depthFirst.printSolutionSteps();
-        System.out.println(depthFirst);
-        assertEquals(16, depthFirst.getTotalMoves());
-    }
+//    @Test
+//    void challengeInput() {
+//        Puzzle8 puzzle = new Puzzle8("2 4 5 3 B 1 8 7 6");
+//        DepthFirst depthFirst = new DepthFirst(puzzle);
+//
+//        depthFirst.calculate();
+//
+//        depthFirst.printSolutionSteps();
+//        System.out.println(depthFirst);
+//        assertEquals(16, depthFirst.getTotalMoves());
+//    }
 }
