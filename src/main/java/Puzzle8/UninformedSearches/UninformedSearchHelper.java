@@ -19,6 +19,16 @@ public class UninformedSearchHelper
       puzzle.printPuzzle();
     }
     System.out.println( "Solved in " + moveHistory.size() + " steps" );
+  }
 
+  public static String toStringFormat(String className, boolean foundSolution, float totalTime, int totalMoves, int openSize, int closedSize)
+  {
+    return className + "{" +
+      "foundSolution=" + foundSolution +
+      ", secondsTaken=" + ( ( double ) Math.round( ( ( double ) totalTime ) / 10 ) ) / 100 +
+      ", totalMoves=" + totalMoves +
+      ", openListSize=" + openSize +
+      ", closedListSize(states processed)=" + closedSize +
+      '}';
   }
 }

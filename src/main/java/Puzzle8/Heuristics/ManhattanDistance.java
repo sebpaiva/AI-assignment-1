@@ -1,6 +1,8 @@
 package Puzzle8.Heuristics;
 
+import Puzzle8.Heuristics.Interface.IHeuristic;
 import Puzzle8.Puzzle8;
+import Puzzle8.Puzzle8.GridCoordinate;
 
 public class ManhattanDistance implements IHeuristic
 {
@@ -21,7 +23,7 @@ public class ManhattanDistance implements IHeuristic
     return manhattanDistanceSum;
   }
 
-  private static int shortestDistanceToEnd( Puzzle8 puzzle, String value )
+  public static int shortestDistanceToEnd( Puzzle8 puzzle, String value )
   {
     Puzzle8.GridCoordinate origin = puzzle.findGridPositionOf( value );
     Puzzle8.GridCoordinate dest = puzzle.getFinalPositionOf( value );

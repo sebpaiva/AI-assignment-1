@@ -62,13 +62,12 @@ public class BreadthFirst
   @Override
   public String toString()
   {
-    return "BreadthFirst{" +
-      "foundSolution=" + foundSolution +
-      ", secondsTaken=" + ( ( double ) Math.round( ( ( double ) totalTime ) / 10 ) ) / 100 +
-      ", totalMoves=" + totalMoves +
-      ", openListSize=" + open.size() +
-      ", closedListSize(states processed)=" + closed.size() +
-      '}';
+    return UninformedSearchHelper.toStringFormat( "BreadthFirst",
+                                                  foundSolution,
+                                                  totalTime,
+                                                  totalMoves,
+                                                  open.size(),
+                                                  closed.size() );
   }
 
   public void printSolutionSteps()

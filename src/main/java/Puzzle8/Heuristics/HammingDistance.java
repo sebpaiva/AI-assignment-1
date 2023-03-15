@@ -1,5 +1,6 @@
 package Puzzle8.Heuristics;
 
+import Puzzle8.Heuristics.Interface.IHeuristic;
 import Puzzle8.Puzzle8;
 
 public class HammingDistance implements IHeuristic

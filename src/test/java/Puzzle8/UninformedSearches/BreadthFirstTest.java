@@ -42,7 +42,7 @@ class BreadthFirstTest {
         assertEquals(7, breadthFirst.getTotalMoves());
     }
 
-        @Test
+    @Test
     void calculate_10MovesToSolution() {
         Puzzle8 puzzle = new Puzzle8("7 1 2 8 B 3 6 5 4");
         BreadthFirst breadthFirst = new BreadthFirst(puzzle);
@@ -65,6 +65,18 @@ class BreadthFirstTest {
         System.out.println(breadthFirst);
         assertEquals(16, breadthFirst.getTotalMoves());
     }
+
+//    @Test
+//    void challengeInput() {
+//        Puzzle8 puzzle = new Puzzle8("2 4 5 3 B 1 8 7 6");
+//        BreadthFirst breadthFirst = new BreadthFirst(puzzle);
+//
+//        breadthFirst.calculate();
+//
+//        breadthFirst.printSolutionSteps();
+//        System.out.println(breadthFirst);
+//        assertEquals(16, breadthFirst.getTotalMoves());
+//    }
 
     // Takes too long, can't run it
 //    @Test

@@ -1,11 +1,10 @@
 package Puzzle8.Heuristics;
 
+import Puzzle8.Heuristics.Interface.IHeuristic;
 import Puzzle8.Puzzle8;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static Puzzle8.Puzzle8.BLANK;
 
 public class PermutationInversion implements IHeuristic
 {

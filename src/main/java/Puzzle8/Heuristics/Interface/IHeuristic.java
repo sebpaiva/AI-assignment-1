@@ -1,4 +1,4 @@
-package Puzzle8.Heuristics;
+package Puzzle8.Heuristics.Interface;
 
 import Puzzle8.Puzzle8;
 

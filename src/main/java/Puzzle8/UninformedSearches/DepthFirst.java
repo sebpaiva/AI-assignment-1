@@ -60,13 +60,12 @@ public class DepthFirst
   @Override
   public String toString()
   {
-    return "DepthFirst{" +
-      "foundSolution=" + foundSolution +
-      ", secondsTaken=" + ( ( double ) Math.round( ( ( double ) totalTime ) / 10 ) ) / 100 +
-      ", totalMoves=" + totalMoves +
-      ", openListSize=" + open.size() +
-      ", closedListSize(states processed)=" + closed.size() +
-      '}';
+    return UninformedSearchHelper.toStringFormat( "DepthFirst",
+                                                  foundSolution,
+                                                  totalTime,
+                                                  totalMoves,
+                                                  open.size(),
+                                                  closed.size() );
   }
 
   public void printSolutionSteps()
