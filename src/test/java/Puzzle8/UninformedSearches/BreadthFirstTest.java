@@ -42,7 +42,7 @@ class BreadthFirstTest {
         assertEquals(7, breadthFirst.getTotalMoves());
     }
 
-        @Test
+    @Test
     void calculate_10MovesToSolution() {
         Puzzle8 puzzle = new Puzzle8("7 1 2 8 B 3 6 5 4");
         BreadthFirst breadthFirst = new BreadthFirst(puzzle);
