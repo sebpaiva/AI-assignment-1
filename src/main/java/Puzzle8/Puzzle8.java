@@ -311,8 +311,6 @@ public class Puzzle8
 
   public record GridCoordinate(int x, int y)
   {
-
-
     // Column
     public int getRow()
     {
